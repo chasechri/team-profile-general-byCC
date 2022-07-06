@@ -49,20 +49,23 @@ const promptIoE = (newMemberData) => {
   return inquirer
     .prompt([
       {
-        type: "checkbox",
+        type: "list",
         name: "engoint",
         message:
           "Would you like to add and engineer or interern or finish building your team?",
         choices: ["Engineer", "Intern", "Finish building team"],
       },
     ])
-    .then((newMemberData) => {
-      console.log(newMemberData);
-      if ("Engineer") {
-        promptEngineer();
-      } else if ("Intern") {
-        promptIntern();
-      } else "Finish building team";
+    .then((direction) => {
+      switch (direction.engoint) {
+        case "Engineer":
+          promptEngineer();
+          break;
+        case "Intern":
+          promptIntern();
+          break;
+        case "Finish building team":
+      }
     });
 };
 
@@ -104,16 +107,40 @@ const promptEngineer = (engineerData) => {
 };
 
 const promptIntern = (internData) => {
-  return inquirer.prompt([
-    {
-      type: "input",
-      name: "internName",
-      message: "What is the interns name?",
-    },
-    {
-      type: "input",
-    },
-  ]);
+  return inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "internName",
+        message: "What is the interns name?",
+      },
+      {
+        type: "input",
+        name: "internId",
+        message: "Whats is the interns ID?",
+      },
+      {
+        type: "input",
+        name: "internEmail",
+        message: "What is the interns email?",
+      },
+      {
+        type: "input",
+        name: "school",
+        message: "What school does the intern go to?",
+      },
+    ])
+    .then((internData) => {
+      console.log(internData);
+      const intern = new Intern(
+        internData.internName,
+        internData.internId,
+        internData.internEmail,
+        internData.school
+      );
+      teamProfs.push(intern);
+      promptIoE();
+    });
 };
 
 promptManager();
