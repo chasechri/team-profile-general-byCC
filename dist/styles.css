@@ -1,0 +1,33 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+header {
+  background-color: black;
+  padding: 1rem;
+}
+
+header h1 {
+  text-align: center;
+  color: gainsboro;
+  font-size: 4rem;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 3rem;
+  text-align: center;
+}
+
+main div {
+  background-color: lightseagreen;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+h2 {
+  font-size: 2rem;
+}

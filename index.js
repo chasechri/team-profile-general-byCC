@@ -6,6 +6,10 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
+const path = require("path");
+
+const OUTPUT_DIR = path.resolve(__dirname, "output");
+const outputPath = path.join(OUTPUT_DIR, "team.html");
 const generatePage = require("./src/template.js");
 
 const teamProfs = [];
@@ -147,6 +151,13 @@ const promptIntern = (internData) => {
       teamProfs.push(intern);
       promptIoE();
     });
+};
+
+const buildPage = () => {
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR);
+  }
+  fs.writeFileSync(outputPath, generatePage(teamProfs), "utf-8");
 };
 
 promptManager();
