@@ -6,6 +6,8 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
+const generatePage = require("./src/template.js");
+
 const teamProfs = [];
 
 const promptManager = (managerData) => {
@@ -52,8 +54,8 @@ const promptIoE = (newMemberData) => {
         type: "list",
         name: "engoint",
         message:
-          "Would you like to add and engineer or interern or finish building your team?",
-        choices: ["Engineer", "Intern", "Finish building team"],
+          "Would you like to add a engineer, interern, another manager, or finish building your team?",
+        choices: ["Engineer", "Intern", "Manager", "Finish building team"],
       },
     ])
     .then((direction) => {
@@ -64,7 +66,11 @@ const promptIoE = (newMemberData) => {
         case "Intern":
           promptIntern();
           break;
+        case "Manager":
+          promptManager();
+          break;
         case "Finish building team":
+          buildPage();
       }
     });
 };
